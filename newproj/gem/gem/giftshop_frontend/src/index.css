@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-canvas: #fafbfd;
+    --card-surface: #ffffff;
+    --text-primary: #0f172a;
+    --text-muted: #64748b;
+    --border-subtle: #e2e8f0;
+    --accent-artisan: #ea580c;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: -0.01em;
+    touch-action: manipulation;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: -0.025em;
+  }
+
+  /* Accessible keyboard focus rings */
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid #ea580c;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* =========================================================================
+     CLEAN, MINIMALIST GLASS & CARD SURFACES
+     ========================================================================= */
+  .glass-nav {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  }
+
+  .glass-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  }
+
+  .glass-card-hover {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  }
+
+  .glass-card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    border-color: #cbd5e1;
+  }
+
+  /* =========================================================================
+     CLEAR BUTTON HIERARCHY (TERRACOTTA PRIMARY CTA, SLATE SECONDARY)
+     ========================================================================= */
+  /* Primary Action CTA (Warm Artisan Terracotta) */
+  .btn-accent {
+    background: #ea580c;
+    color: #ffffff;
+    border-radius: 0.875rem;
+    font-weight: 800;
+    transition: all 0.15s ease-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 8px rgba(234, 88, 12, 0.25);
+    min-height: 40px;
+  }
+
+  .btn-accent:hover {
+    background: #c2410c;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(234, 88, 12, 0.35);
+  }
+
+  .btn-accent:active {
+    transform: scale(0.98);
+  }
+
+  /* Secondary Bold Action (Obsidian Slate) */
+  .btn-primary {
+    background: #0f172a;
+    color: #ffffff;
+    border-radius: 0.875rem;
+    font-weight: 700;
+    transition: all 0.15s ease-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 40px;
+  }
+
+  .btn-primary:hover {
+    background: #1e293b;
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  /* Tertiary / Neutral Action (Porcelain with Hairline Border) */
+  .btn-secondary {
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.875rem;
+    font-weight: 700;
+    transition: all 0.15s ease-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 40px;
+  }
+
+  .btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #0f172a;
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.98);
+  }
+
+  .btn-success {
+    background: #059669;
+    color: #ffffff;
+    border-radius: 0.875rem;
+    font-weight: 700;
+    transition: all 0.15s ease-out;
+    min-height: 40px;
+  }
+
+  .btn-success:hover {
+    background: #047857;
+  }
+
+  .badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  /* =========================================================================
+     7 UNIFIED NORMALIZED SHAPE MASKS (PIXEL-PERFECT WITH CANVAS EXPORT)
+     ========================================================================= */
+  .shape-mask-heart {
+    clip-path: url(#svg-mask-heart);
+  }
+
+  .shape-mask-circle {
+    border-radius: 50%;
+  }
+
+  .shape-mask-square {
+    border-radius: 1.5rem;
+  }
+
+  .shape-mask-shield {
+    clip-path: url(#svg-mask-shield);
+  }
+
+  .shape-mask-oval {
+    clip-path: url(#svg-mask-oval);
+  }
+
+  .shape-mask-hexagon {
+    clip-path: url(#svg-mask-hexagon);
+  }
+
+  .shape-mask-star {
+    clip-path: url(#svg-mask-star);
+  }
+
+  .text-gradient-warm {
+    color: #ea580c;
+  }
+
+  /* Shimmer Skeleton Placeholder */
+  .skeleton-shimmer {
+    background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
+
+/* Hide scrollbar for clean horizontal tab strips */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,0 +1,18 @@
+{
+  "short_name": "GobiGifts",
+  "name": "Gobi Custom Gifts | Personalized Acrylic Keepsakes",
+  "description": "Personalized acrylic photo keychains, vehicle tags, and wedding return gifts handcrafted in Gobichettipalayam.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0F172A",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/"
+}
