@@ -1,0 +1,176 @@
+GIFT SHOP WEBSITE - HOSTING, CHANGES, ERRORS AND TROUBLESHOOTING LOG
+Compiled from the visible conversation through 17 October 2026.
+Note: This is a structured summary of the chat, not a verbatim transcript. Unverified diagnoses are marked accordingly.
+
+1. GOAL
+- Host Gift Shop React/Vite frontend on Vercel.
+- Run Django backend on local Windows laptop for approximately two hours during client demo.
+- Expose local backend publicly through ngrok.
+- Share website link with client.
+- Separate request: share Rentido mobile app updates; no actual updates were provided in this conversation.
+
+2. LOCAL PROJECT PATHS AND TECHNOLOGY
+Frontend: C:\Users\javak\newproj\gem\gem\giftshop_frontend
+Backend path suggested in chat: C:\Users\javak\newproj\gem\gem\giftshop_backend (confirm on disk)
+Frontend: React + Vite; Axios in src/api.js.
+Backend: Django, expected on port 8000.
+Hosting: Vercel (frontend); ngrok (public tunnel to local Django backend).
+Git branch shown on Vercel: master.
+Commit shown: 95b6eec - Fix Vite asset configuration.
+
+3. NGROK INSTALLATION / COMMAND ERROR
+Initial CMD input: ngork
+Error: 'ngork' is not recognized as an internal or external command, operable program or batch file.
+Cause: typo; correct executable is ngrok.
+Suggested verification: ngrok version
+Suggested account setup (if needed): ngrok config add-authtoken YOUR_AUTH_TOKEN
+Backend tunnel command: ngrok http 8000
+
+4. RESTART AFTER LAPTOP REBOOT
+The laptop unexpectedly restarted. Vercel-hosted frontend remains deployed independently of the laptop, but Django and ngrok need to run again.
+Suggested backend commands:
+  cd /d C:\Users\javak\newproj\gem\gem\giftshop_backend
+  venv\Scripts\activate.bat
+  python manage.py runserver 0.0.0.0:8000
+The venv path is an example; verify the environment folder exists.
+Open second CMD and run:
+  ngrok version
+  ngrok http 8000
+Keep both CMD sessions open while demonstrating.
+
+5. CONFIRMED NGROK SESSION FROM SCREENSHOT
+Status: online
+Plan: Free
+Version: 3.39.9-msix-stable
+Region: India (in)
+Forwarding: https://registrar-geography-dividend.ngrok-free.dev -> http://localhost:8000
+Local ngrok inspection interface: http://127.0.0.1:4040
+This screenshot confirms the tunnel was running, but does not independently prove Django was responding.
+The tunnel may change URL after restarting; recheck before demo.
+
+6. FRONTEND SOURCE AND ENVIRONMENT VARIABLE
+Screenshot of giftshop_frontend/src/api.js:
+  import axios from 'axios';
+  const API_URL = import.meta.env.VITE_API_URL;
+  export const getProducts = () => axios.get(`${API_URL}catalog/products/`);
+  export const getCategories = () => axios.get(`${API_URL}catalog/categories/`);
+  export const getProduct = (id) => axios.get(`${API_URL}catalog/products/${id}/`);
+The trailing slash in the base URL matters because the code concatenates it with 'catalog/...'.
+No .env file was visible in frontend root screenshot.
+Suggested creating giftshop_frontend/.env.production containing:
+  VITE_API_URL=https://registrar-geography-dividend.ngrok-free.dev/
+Do not hardcode the tunnel address into src/api.js if using the Vite environment variable.
+.env.production is a local build input. Vercel also needs the environment variable configured in project settings and a new build/deployment.
+
+7. FRONTEND FOLDER DETAILS
+Screenshot showed .git, dist, node_modules, public, src, .gitignore, eslint.config.js, index.html, package.json, package-lock.json, postcss.config.js, README.md, tailwind.config.js, vite.config.js.
+Screenshot of src/assets showed hero.png, react.svg and vite.svg.
+The assets folder is not where ngrok is run.
+
+8. FRONTEND BUILD RESULT
+Command executed in frontend directory:
+  npm run build
+Output showed:
+  giftshop_frontend@0.0.0 build
+  vite build
+  vite v8.2.1 building client environment for production
+  1914 modules transformed
+  dist/index.html
+  dist/assets/index-Ds16wiZQ.css (45.26 kB)
+  dist/assets/index-Bbx8gAag.js (606.41 kB)
+  built in 22.66s
+Build succeeded. Warning: some chunks larger than 500 kB after minification; performance recommendation, not a build failure.
+Additional plugin timing messages were informational.
+
+9. VERCEL ENVIRONMENT VARIABLE SCREEN
+Project: giftshop-frontend
+Key: VITE_API_URL
+Value: https://registrar-geography-dividend.ngrok-free.dev/
+Environments: Production and Preview
+Screenshot showed Type 'Secret' selected and 'Config' disabled.
+Vercel displayed warning: public framework prefixes expose values to the browser; choose Config if safe.
+Advice given: cancel, delete the existing variable if necessary, recreate VITE_API_URL as Config, save, and redeploy.
+IMPORTANT: The conversation does not confirm whether deletion/recreation was performed; do not assume it was.
+
+10. VERCEL DEPLOYMENT SCREEN
+Deployment status: Ready; Production; Current.
+Build duration displayed: 11s.
+Source branch: master.
+Source commit: 95b6eec - Fix Vite asset configuration.
+Production domain displayed:
+  https://giftshop-frontend-sigma.vercel.app/
+Other Vercel-generated URLs shown included:
+  giftshop-frontend-git-master-javakarbharathis-projects.vercel.app
+  giftshop-frontend-8lqrqhbg8-javakarbharathis-projects.vercel.app
+Vercel's Ready status means deployment finished; it does not verify backend/API responses or browser behavior.
+
+11. WEBSITE OPENING PROBLEM
+User reported plain production URL did not work:
+  https://giftshop-frontend-sigma.vercel.app/
+User reported the same URL WITH a query parameter did work:
+  https://giftshop-frontend-sigma.vercel.app/?utm_source=chatgpt.com
+The query parameter utm_source is normally tracking metadata and should not be necessary for the site to load.
+Root cause was NOT established in the conversation.
+Possible areas suggested for investigation: browser cache, routing/redirects, frontend code behavior, deployment-specific settings. These were hypotheses, not confirmed findings.
+Recommended diagnostic steps:
+- Try the plain URL in an Incognito window.
+- Open working URL, remove query parameter, press Enter.
+- Open browser DevTools (F12) -> Console and Network, reload, inspect errors and failed requests.
+- Compare whether page is blank, returns a Vercel error, or opens without products.
+- Check if a service worker, cached asset, query-dependent redirect, or browser extension affects loading if initial checks indicate that.
+
+12. OTHER ERRORS REFERENCED DURING CHAT
+Earlier error mentioned: asset URL /assets/index-4foCSci0.js returned HTTP 404.
+Earlier JavaScript syntax error was mentioned but its exact message was not supplied in this visible conversation.
+No verified fix for those earlier browser errors is established here.
+Possible backend-side errors to inspect if they appear: CORS failure, Django DisallowedHost, 404 or failed API requests.
+No evidence in the screenshots confirms that any of those backend errors occurred.
+
+13. TESTING THE BACKEND
+Suggested test URL:
+  https://registrar-geography-dividend.ngrok-free.dev/catalog/products/
+Another suggested route:
+  https://registrar-geography-dividend.ngrok-free.dev/admin/
+A Django admin 404 is not proof that the backend is down (admin route may be disabled).
+Test the products API and look for a JSON response or inspect Django logs.
+If Vercel frontend calls fail, check CORS configuration and Django ALLOWED_HOSTS for the actual tunnel hostname, and confirm the API route exists. Do not change settings without seeing the error.
+
+14. IMPORTANT DEMO OPERATION NOTES
+- Vercel frontend is hosted independently of the laptop and need not be started locally for the client to view the deployed site.
+- Local Django and ngrok must both remain running during the demo.
+- Laptop must remain powered on, connected to the internet and awake.
+- Ngrok public URL may change; if so, update VITE_API_URL in Vercel and redeploy the frontend.
+- Never expose sensitive customer data, Django debug information, admin tools or secrets to the public demo.
+- For a two-hour demo, stop Django/ngrok afterward when access is no longer needed.
+
+15. STATUS AT END OF CHAT
+CONFIRMED:
+- Local Vite production build succeeded.
+- Ngrok screenshot showed online tunnel to port 8000.
+- Vercel deployment screenshot showed Ready/Current production.
+- User reported the URL with ?utm_source=chatgpt.com works.
+UNCONFIRMED / PENDING:
+- Whether plain URL failure is reproducible across browsers.
+- Whether Django currently responds correctly through the tunnel.
+- Whether Vercel environment variable was recreated as Config and used in the deployed build.
+- Whether the deployed website fetches product/category data correctly.
+- Exact browser Console/Network error for plain URL.
+- Root cause of difference between plain and query-parameter URL.
+- Rentido mobile app updates.
+
+16. USEFUL COMMANDS
+Frontend build:
+  cd /d C:\Users\javak\newproj\gem\gem\giftshop_frontend
+  npm run build
+Frontend local development (optional):
+  npm run dev
+Django backend (confirm actual path and virtual environment):
+  cd /d C:\Users\javak\newproj\gem\gem\giftshop_backend
+  venv\Scripts\activate.bat
+  python manage.py runserver 0.0.0.0:8000
+Ngrok (separate CMD):
+  ngrok http 8000
+Git status (optional):
+  git status
+
+END OF SUMMARY

@@ -1,0 +1,132 @@
+================================================================================
+                    TN36 CUSTOM GIFTS - COMPREHENSIVE PROJECT UPDATE
+================================================================================
+Project Name        : TN36 Custom Gifts (TN36 தனிப்பயன் பரிசுகள்)
+Tagline             : Handcrafted Personalized Keepsakes & Photo Studio Platform
+Workshop Location   : Gobichettipalayam, Erode District, Tamil Nadu - 638452
+Support Contact     : +91 6379979364 | tn36customgifts@gmail.com
+Status              : Active & Fully Functional (Backend API + Frontend App)
+Last Updated        : August 2026
+
+--------------------------------------------------------------------------------
+1. PROJECT OVERVIEW
+--------------------------------------------------------------------------------
+TN36 Custom Gifts is a full-stack, bilingual (English & தமிழ்) e-commerce and 
+live-customization web platform designed for manufacturing and retailing 
+personalized laser-crafted acrylic keepsakes, vehicle number plate tags, luxury 
+wooden photo frames, resin floral coasters, and bulk wedding/event return gifts.
+
+The platform provides a 100% interactive design studio where customers can upload 
+photos, crop & zoom inside precision geometric silhouettes, select frame 
+materials and sizes, engrave bilingual Tamil/English dedications, and preview 
+high-resolution mockups before placing orders.
+
+--------------------------------------------------------------------------------
+2. TECHNOLOGY STACK ARCHITECTURE
+--------------------------------------------------------------------------------
+
+A. FRONTEND CLIENT (giftshop_frontend)
+   • Core Architecture   : React 18 (Single Page Application) powered by Vite 8
+   • UI & Design Tokens  : Custom Vanilla Tailwind CSS with a strict color system:
+                           - Primary CTA    : Warm Artisan Terracotta (#EA580C)
+                           - Secondary Bold : Obsidian Slate (#0F172A)
+                           - Surfaces       : Porcelain Canvas (#FAFBFD) & White Cards
+   • Bilingual Localization: i18next & react-i18next supporting instant switching
+                           between English and Tamil across 100% of UI components.
+   • Canvas Image Engine : react-easy-crop + HTML5 2D Canvas with normalized 
+                           geometric bezier clipping algorithms (cropUtils.js).
+   • Vector Masks        : Scalable SVG clipPath definitions (clipPathUnits:
+                           objectBoundingBox) ensuring 1:1 pixel-perfect match 
+                           between live CSS preview and exported canvas blob.
+   • Routing & Navigation: React Router DOM v6 with automated ScrollToTop listener.
+   • Global State Mgmt   : React Context API:
+                           - AuthContext     : Session & multi-role permissions.
+                           - CartContext     : Tiered bulk discounts & coupons.
+                           - WishlistContext : Server-persisted saved items.
+                           - ToastContext    : Tactile UI feedback toasts.
+   • Icons & Typography  : Lucide-React + Google Fonts ('Outfit' & 'Plus Jakarta Sans').
+   • PWA & Mobile UX     : Native App Bottom Nav Bar, Service Worker (sw.js),
+                           Web App Manifest (manifest.json), 44px+ tap targets.
+
+B. BACKEND API SERVER (giftshop_backend)
+   • Framework           : Python 3.12 + Django 5.x + Django REST Framework (DRF)
+   • Relational Database : MySQL Database (shop_db) with schema migrations.
+   • Multi-Role Security : Role-Based Access Control (RBAC) with 4 distinct roles:
+                           1. Customer        : Store browsing, studio, orders.
+                           2. Admin           : Catalog CRUD, analytics, pricing.
+                           3. Shop Owner      : Laser queue, photo blobs, UTR check.
+                           4. Delivery Partner: Route dispatches & live checkpoints.
+   • Payment Systems     :
+                           1. Razorpay API Integration (Cards, Net Banking, UPI).
+                           2. Dynamic UPI QR Scanner (GPay, PhonePe, Paytm, BHIM).
+                           3. Cash on Delivery (COD) workflow.
+   • Mail Automation     : Automated SMTP order receipts and dispatch notifications.
+
+--------------------------------------------------------------------------------
+3. CORE MODULES & SPECIALIZED FEATURES
+--------------------------------------------------------------------------------
+
+1. INTERACTIVE 7-SHAPE ACRYLIC KEEPSAKE STUDIO
+   • Supported Shapes: Heart, Circle, Square, TN Vehicle Shield, Oval, Hexagon, Star.
+   • Dual-surface customization: Front Photo and Back Photo independent cropping.
+   • Unified mathematical geometry ensuring live SVG preview matches final laser print.
+   • Tamil Typography Helper: 1-click Tamil phrase chips and auspicious icons.
+
+2. CUSTOM PHOTO FRAME STUDIO MODE
+   • Orientation Switcher: Portrait (செங்குத்து) vs. Landscape (கிடைமட்டம்).
+   • Standard Sizes: 4×6 Desk, 5×7 Living Room, 8×10 Studio, A4 Wall Hanging.
+   • Frame Materials: Royal Walnut Wood, Obsidian Black, Champagne Gold, White.
+   • Mounting Options: Tabletop Easel Stand vs. Wall Mounting Hook.
+   • Laser Engraved Dedication Plaque with real-time text rendering.
+
+3. STRICT ROLE-LOCKED AI ASSISTANT CHATBOT
+   • Strict zero-leakage role isolation: Customers ONLY see customer-related help.
+   • Categorized FAQ decision tree: Studio guide, live tracking, UPI QR payments.
+   • WhatsApp Workshop Escalation button (+91 6379979364) for unscripted queries.
+
+4. LIVE ROUTE LOGISTICS & 5-STAGE CHECKPOINT TRACKER
+   • Checkpoint timeline: Order Confirmed -> Laser Printing -> Polish -> Dispatched -> Delivered.
+   • Delivery Partner portal (/partner-login) for route advancement and customer calling.
+
+5. BULK RETURN GIFT WHOLESALE CALCULATOR
+   • Instant tiered discounts for 25, 50, 100, 250, and 500+ pieces (from ₹99/pc).
+   • Free individual yellow thamboolam pouches and laser date tags included.
+   • Direct 1-tap WhatsApp booking quote generation.
+
+6. PROMOTIONS & SERVER-PERSISTED WISHLIST
+   • Server wishlist synced across devices via /api/catalog/wishlist/.
+   • Dynamic coupon validation endpoint (/api/catalog/coupons/validate/) for WELCOME10, GOBI50.
+
+7. ADDRESS BOOK & GUEST CHECKOUT
+   • Saved shipping addresses for 1-click repeat customer checkout.
+   • Seamless guest checkout without mandatory account registration.
+
+8. DOWNLOADABLE TAX INVOICE RECEIPT
+   • Clean, formatted PDF/print-ready order confirmation receipt with breakdown.
+
+9. ADMIN ANALYTICS & INVENTORY CONTROL
+   • Real-time revenue summary, active orders, and low-stock alerts.
+   • Product catalog CRUD manager with multi-product type selection.
+
+--------------------------------------------------------------------------------
+4. PRODUCT CATALOG BREAKDOWN
+--------------------------------------------------------------------------------
+1. South Indian Wedding Couple Heart Keepsake (Double-sided acrylic)
+2. Luxury Acrylic & Wood Tabletop Photo Frame (4x6, 5x7, 8x10, A4)
+3. TN Vehicle Registration Plate Tag (TN 36 / 38 / 01 with emergency QR)
+4. Classic Family Portrait Circle Keepsake (UV resin high-gloss)
+5. Temple Deity Car Mirror Charm (Lord Murugan / Vinayagar devotional)
+6. Resin Floral Photo Coasters (Set of 4 with dried flower petals)
+7. Wooden Engraved Family Door Nameplate (Teak wood finish + brass text)
+
+--------------------------------------------------------------------------------
+5. SERVERS & LOCAL ENVIRONMENT
+--------------------------------------------------------------------------------
+• Backend Server : http://127.0.0.1:8000/ (Django REST Framework)
+• Frontend Client : http://localhost:5173/ (Vite Dev Server)
+• Build Command  : npm run build (Verified 0 errors / 0 lint warnings)
+• Database       : MySQL shop_db running on localhost:3306
+
+================================================================================
+                      END OF PROJECT UPDATE REPORT
+================================================================================
